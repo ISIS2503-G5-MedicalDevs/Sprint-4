@@ -1,3 +1,5 @@
+#Este codigo no se utiliza. Pero lo voy a dejar quito por si acaso
+
 from django.db import models
 
 class IPS(models.Model):
