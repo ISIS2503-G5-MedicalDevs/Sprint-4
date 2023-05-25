@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'IPS',
-    'HistoriaClinica',
     'social_django',
 ]
 
@@ -77,24 +76,24 @@ WSGI_APPLICATION = 'widmy_Project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ips_db',
-        'USER': 'ips_user',
-        'PASSWORD': 'isis2503',
-        'HOST': '10.128.0.14',
-        'PORT': '5432'
-    },
-    'HistoriaClinica': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'historias_db',
-        'USER': 'historias_user',
-        'PASSWORD': 'isis2503',
-        'HOST': '10.128.0.15',    
-        'PORT': '5432'
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'ips_db',
+#        'USER': 'ips_user',
+#        'PASSWORD': 'isis2503',
+#        'HOST': '10.128.0.14',
+#        'PORT': '5432'
+#    },
+#    'HistoriaClinica': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'historias_db',
+#        'USER': 'historias_user',
+#        'PASSWORD': 'isis2503',
+#        'HOST': '10.128.0.15',    
+#        'PORT': '5432'
+#    }
+#}
 
 
 # Password validation
@@ -142,7 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "/login/auth0" 
 LOGIN_REDIRECT_URL = "/" 
-LOGOUT_REDIRECT_URL = "https://isis2503-john-suarez20.us.auth0.com/v2/logout?returnTo=http%3A%2F%2F34.111.148.224/" 
+LOGOUT_REDIRECT_URL = "https://isis2503-john-suarez20.us.auth0.com/v2/logout?returnTo=http%3A%2F%2F34.111.148.224/" #TODO: Cambiar esta ip a la ip estatica de Kong
 SOCIAL_AUTH_TRAILING_SLASH = False # Remove end slash from routes 
 SOCIAL_AUTH_AUTH0_DOMAIN = 'isis2503-john-suarez20.us.auth0.com' 
 SOCIAL_AUTH_AUTH0_KEY = 'BLsbaxyL9hAavZWq9A2ncuiJyamukDnn' 
@@ -157,3 +156,5 @@ AUTHENTICATION_BACKENDS = {
     'widmy_Project.auth0backend.Auth0', 
     'django.contrib.auth.backends.ModelBackend', 
     }
+
+MONGO_CLI = os.environ['MONGO_CLIENT']

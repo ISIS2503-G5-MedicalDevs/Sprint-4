@@ -22,7 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('IPS/',include('IPS.urls')),
     path('health-check/',views.healthCheck),
-    path('HistoriaClinica/', include('HistoriaClinica.urls')),
     path(r'', include('django.contrib.auth.urls')),
     path(r'', include('social_django.urls')),
 ]
