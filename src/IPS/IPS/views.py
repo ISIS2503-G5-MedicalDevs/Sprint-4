@@ -86,11 +86,25 @@ def IPS_view(request, pk):
 
 
 
-@api_view(["POST","PUT"])
+@api_view(["POST","PUT","GET"])
 def IPS_test(request):
     client = MongoClient(settings.MONGO_CLI)
     db = client.ips_db
     IPS = db['IPS']
+    if request.method == 'GET':
+        result = []
+        data = IPS.find({})
+        for dto in data:
+            jsonData = {
+            "id" : str(dto['_id']),
+            "nombre": dto['nombre'],
+            "direccion": dto['direccion'],
+            "ciudad" : dto['ciudad'],
+            "capacidad" : dto['capacidad']
+            }
+            result.append(jsonData)
+        client.close()
+        return JsonResponse(result, safe = False)
     if request.method == 'POST':
         data = JSONParser().parse(request)
         result = IPS.insert(data)
@@ -106,6 +120,7 @@ def IPS_test(request):
         newValues = json.loasd(request.body)
         #TODO: Poner el id de la primera IPS que se termine creando aqui
         respo = IPS.find_one_and_update({'_id': ObjectId('Cambiar')}, {'$set': newValues }, return_document = ReturnDocument.AFTER)
+        client.close()
         return JsonResponse(respo, safe = False)
 
 
@@ -120,4 +135,5 @@ def IPS_test2(request):
     newValues = json.loasd(request.body)
     #TODO: Poner el id de la primera IPS que se termine creando aqui
     respo = IPS.find_one_and_update({'_id': ObjectId('Cambiar')}, {'$set': newValues }, return_document = ReturnDocument.AFTER)
+    client.close()
     return JsonResponse(respo, safe = False)
